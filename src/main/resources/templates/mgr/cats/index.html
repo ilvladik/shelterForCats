@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Котики</title>
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div th:each="cat : ${cats}">
+    <img th:src="@{/cats/{id}/picture(id=${cat.getId()})}"/>
+    <a th:href="@{/cats/{id}(id=${cat.getId()})}"
+       th:text="${cat.getName() + ', ' + cat.getSex()}">cat</a>
+    <form th:method="DELETE" th:action="@{/mgr/cats/{id}(id=${cat.getId()})}">
+        <input type="submit" value="Удалить">
+    </form>
+<hr/>
+</div>
+<a th:href="@{/mgr/cats/new}">Добавить!</a>
+</body>
+</html>

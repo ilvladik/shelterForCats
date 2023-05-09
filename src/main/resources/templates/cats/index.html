@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Котики</title>
+    <style>
+        img {
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<div th:each="cat : ${cats}">
+    <img th:src="@{/cats/{id}/picture(id=${cat.getId()})}"/>
+    <a th:href="@{/cats/{id}(id=${cat.getId()})}"
+       th:text="${cat.getName() + ', ' + cat.getSex()}">user</a>
+<hr/>
+</div>
+</body>
+</html>

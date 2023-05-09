@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Заявки</title>
+  <style>
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+<div th:each="app : ${apps}">
+  <div th:if="${app.getCat()}">
+    <img th:src="@{/cats/{id}/picture(id=${app.getCat().getId()})}"/>
+    <a th:href="@{/cats/{id}(id=${app.getCat().getId()})}"
+      th:text="${app.getCat().getName()}"/>
+  </div>
+  <div th:unless="${app.getCat()}">
+    <span>Кота\кошки больше нет</span>
+  </div>
+  <span th:text="${app.getName() + ', ' + app.getPhone()}">application</span>
+  <form th:method="DELETE" th:action="@{/mgr/apps/{id}(id=${app.getId()})}">
+    <input type="submit" value="Закрыть заявку!">
+  </form>
+  <hr/>
+</div>
+</body>
+</html>
